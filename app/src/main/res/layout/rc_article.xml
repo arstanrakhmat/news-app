@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_8dp">
+
+    <ImageView
+        android:id="@+id/ivArticleImage"
+        android:layout_width="@dimen/width_111dp"
+        android:layout_height="@dimen/height_74dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_11dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/source"
+        android:textColor="@color/rc_article_source"
+        android:textFontWeight="400"
+        android:textSize="@dimen/text_size_12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivArticleImage"
+        tools:targetApi="31" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/title"
+        android:textColor="@color/black"
+        android:textFontWeight="500"
+        android:textSize="@dimen/text_size_15sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/ivArticleImage"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="31" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:fontFamily="@font/roboto"
+        android:maxLines="5"
+        android:text="@string/description"
+        android:textColor="@color/black"
+        android:textFontWeight="300"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivArticleImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        tools:targetApi="31" />
+
+    <TextView
+        android:id="@+id/tvPublishedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/published_at"
+        android:textColor="@color/rc_published_at"
+        android:textFontWeight="400"
+        android:textSize="@dimen/text_size_10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSource"
+        tools:targetApi="31" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
