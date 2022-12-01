@@ -48,29 +48,45 @@ class ArticleFragment : Fragment() {
 
     private fun clickListeners(article: Article) {
         binding.back.setOnClickListener { navigateUp() }
-        binding.fab.setOnClickListener {
-            Toast.makeText(requireContext(), "Article is saved", Toast.LENGTH_SHORT).show()
-            viewModel.saveArticle(article)
-        }
 
-//        binding.fab.apply {
-//            setOnClickListener {
-//                if (!isArticleSave) {
-//                    Toast.makeText(requireContext(), "Article is saved", Toast.LENGTH_SHORT).show()
-//                    viewModel.saveArticle(article)
+        binding.fab.apply {
+
+            if (article.isArchived) {
+                setImageResource(R.drawable.ic_saved_article)
+            } else {
+                setImageResource(R.drawable.ic_not_saved_article)
+            }
+
+
+            setOnClickListener {
+                if (article.isArchived) {
+                    viewModel.deleteArticle(article)
 //                    setImageResource(R.drawable.ic_saved_article)
-//                } else {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Article deleted from Saved ones",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                    viewModel.deleteArticle(article)
-//                    setImageResource(R.drawable.ic_not_saved_article)
-//                }
-//            }
-//        }
 
+                    Toast.makeText(
+                        requireContext(),
+                        "Article is restored from cash",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    viewModel.saveArticle(
+                        Article(
+                            article.id,
+                            article.author,
+                            article.content,
+                            article.description,
+                            article.publishedAt,
+                            article.source,
+                            article.title,
+                            article.url,
+                            article.urlToImage,
+                            true
+                        )
+                    )
+                    Toast.makeText(requireContext(), "Article is saved", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun navigateUp() {

@@ -13,14 +13,12 @@ import com.example.newsapp.adapters.NewsAdapter
 import com.example.newsapp.databinding.FragmentSavedNewsBinding
 import com.example.newsapp.ui.MainActivity
 import com.example.newsapp.ui.NewsViewModel
-import kotlin.properties.Delegates
 
 class SavedNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentSavedNewsBinding
     private lateinit var viewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +34,7 @@ class SavedNewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         clickListeners()
         setupRecyclerView()
+        setupSearchView()
 
         viewModel = (activity as MainActivity).viewModel
 
@@ -53,6 +52,38 @@ class SavedNewsFragment : Fragment() {
             newsAdapter.differ.submitList(articles)
         })
 
+    }
+
+    private fun observeData(querySearch: String) {
+        val searchQuery = "%$querySearch%"
+
+        viewModel.getSearchArchiveProduct(searchQuery)
+            .observe(viewLifecycleOwner, Observer { articles ->
+                newsAdapter.differ.submitList(articles)
+            })
+    }
+
+    private fun setupSearchView() {
+        binding.searchView.apply {
+            isSubmitButtonEnabled = true
+            setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if (query != null) {
+                        observeData(query)
+                    }
+
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText != null) {
+                        observeData(newText)
+                    }
+
+                    return true
+                }
+            })
+        }
     }
 
     private fun clickListeners() {

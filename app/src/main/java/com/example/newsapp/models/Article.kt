@@ -11,14 +11,16 @@ import com.example.newsapp.databse.Converters
 data class Article(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
-    val author: String,
-    val content: String,
-    val description: String,
-    val publishedAt: String,
+    val author: String?,
+    val content: String?,
+    val description: String?,
+    val publishedAt: String?,
     val source: Source,
-    val title: String,
+    val title: String?,
     val url: String,
-    val urlToImage: String
+    val urlToImage: String?,
+    var isArchived: Boolean
+
 ) : Serializable {
     override fun hashCode(): Int {
         var result = id.hashCode()

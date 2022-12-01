@@ -17,6 +17,9 @@ interface ArticleDao {
     @Query("SELECT * FROM articles")
     fun getAllArticle(): LiveData<List<Article>>
 
+    @Query("SELECT * FROM articles WHERE title LIKE :title AND isArchived LIKE :isArchived")
+    fun getSearchArchiveArticle(title: String, isArchived: Boolean = true): LiveData<List<Article>>
+
     @Delete
     suspend fun deleteArticle(article: Article)
 }

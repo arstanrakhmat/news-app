@@ -1,5 +1,6 @@
 package com.example.newsapp.repository
 
+import androidx.lifecycle.LiveData
 import com.example.newsapp.api.RetrofitInstance
 import com.example.newsapp.databse.ArticleDatabase
 import com.example.newsapp.models.Article
@@ -15,6 +16,10 @@ class NewsRepository(val db: ArticleDatabase) {
     suspend fun upsert(article: Article) = db.getArticleDao().upsert(article)
 
     fun getSavedNews() = db.getArticleDao().getAllArticle()
+
+    fun getSearchArchiveProduct(title: String): LiveData<List<Article>> {
+        return db.getArticleDao().getSearchArchiveArticle(title)
+    }
 
     suspend fun deleteArticle(article: Article) = db.getArticleDao().deleteArticle(article)
 

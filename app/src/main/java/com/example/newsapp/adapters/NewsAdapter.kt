@@ -44,14 +44,6 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-//        return ViewHolder(
-//            LayoutInflater.from(parent.context).inflate(
-//                R.layout.rc_article,
-//                parent,
-//                false
-//            )
-//        )
-
         binding = RcArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding.root)
